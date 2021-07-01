@@ -1,5 +1,6 @@
+// Function that runs the whole page
 $(document).ready(function () {
-
+    // Made button to store  time and value to local storage
     $(".saveBtn").on("click", function () {
         var value = $(this).siblings(".description").val();
         console.log(value);
@@ -7,7 +8,7 @@ $(document).ready(function () {
         console.log(time);
         localStorage.setItem(time, value);
     })
-
+    // fetches current hour
     function getCurrentHour () {
         var hour = moment().hours();
         console.log(hour);
@@ -15,14 +16,17 @@ $(document).ready(function () {
         $(".time-block").each(function(){
             var timeBlock = parseInt ($(this).attr('id').split('-')[1]);
             console.log(timeBlock);
+            // if hour has past, shows as grey
             if (timeBlock < hour) {
                 $(this).addClass("past");
             } 
+            // if on current hour, shows up as red
             else if (timeBlock === hour){
                 $(this).removeClass("past");
                 $(this).addClass("present");
             }
             else {
+                // shows up as green for all future times
                 $(this).removeClass("past");
                 $(this).removeClass("present");
                 $(this).addClass("future");
@@ -30,6 +34,7 @@ $(document).ready(function () {
         })
     }
     getCurrentHour();
+    // pulls from local storage
     $("#hour-9 .description").val(localStorage.getItem("hour-9"));
     $("#hour-10 .description").val(localStorage.getItem("hour-10"));
     $("#hour-11 .description").val(localStorage.getItem("hour-11"));
@@ -48,21 +53,5 @@ var ecurrentDay = document.getElementById("currentDay");
    ecurrentDay.innerHTML = nowMoment;
 }
 date();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 })
